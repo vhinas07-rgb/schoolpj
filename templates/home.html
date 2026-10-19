@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوره‌های آموزشی</title>
+
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f2f5fa;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #2457a7;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .categories {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .categories a {
+            color: #2457a7;
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        .course {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .course img {
+            width: 100%;
+            max-width: 300px;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .course a {
+            display: inline-block;
+            background-color: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>سامانه دوره‌های آموزشی</h1>
+        <p>یادگیری مهارت‌های جدید برای آینده‌ای بهتر</p>
+    </header>
+
+    <div class="container">
+
+        <div class="categories">
+            <h3>دسته‌بندی دوره‌ها</h3>
+            <a href="#">همه دوره‌ها</a>
+            <a href="#">برنامه‌نویسی</a>
+            <a href="#">هوش مصنوعی</a>
+            <a href="#">طراحی وب</a>
+        </div>
+{% for course in courses %}
+        <div class="course">
+              <img src="{{ course.image.url }}" alt="{{ course.title }}">
+            <h2>{{ course.title }}</h2>
+            <p>آموزش برنامه‌نویسی پایتون از مقدماتی تا پیشرفته</p>
+            <a href="{% url 'details' course.pk %}">مشاهده جزئیات</a>
+
+        </div>
+        
+{% endfor %}
+   
+
+    <footer>
+        <p>سامانه معرفی دوره‌های آموزشی</p>
+    </footer>
+
+</body>
+</html>

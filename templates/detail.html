@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات دوره</title>
+
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f2f5fa;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #2457a7;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .course-details {
+            background-color: white;
+            width: 70%;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .course-details p {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #2457a7;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>جزئیات دوره آموزشی</h1>
+    </header>
+
+
+
+
+<div class="course-details">
+
+    <h2>{{ course.title }}</h2>
+
+    <p>
+        <strong>مدرس دوره:</strong>
+        {{ course.teacher }}
+    </p>
+
+    <p>
+        <strong>مدت زمان دوره:</strong>
+        {{ course.duration }}
+    </p>
+
+    <p>
+        <strong>هزینه دوره:</strong>
+        {{ course.price }} تومان
+    </p>
+
+    <p>
+        <strong>دسته‌بندی:</strong>
+        {% for category in course.category.all %}
+            {{ category.name }}{% if not forloop.last %}، {% endif %}
+        {% empty %}
+            دسته‌بندی مشخص نشده است.
+        {% endfor %}
+    </p>
+
+    <p>
+        <strong>وضعیت ثبت‌نام:</strong>
+        {% if course.status %}
+            <span class="status">در حال ثبت‌نام</span>
+        {% else %}
+            <span class="status">ثبت‌نام غیرفعال است</span>
+        {% endif %}
+    </p>
+
+    <p>
+        <strong>توضیحات دوره:</strong>
+        در این دوره با اصول برنامه‌نویسی پایتون آشنا می‌شوید.
+    </p>
+
+    <a href="{% url 'home' %}">بازگشت به دوره‌ها</a>
+
+</div>
+
+
+</body>
+
+
+
+</html>
