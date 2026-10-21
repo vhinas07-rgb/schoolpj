@@ -80,18 +80,25 @@
 
     <div class="container">
 
-        <div class="categories">
-            <h3>دسته‌بندی دوره‌ها</h3>
-            <a href="#">همه دوره‌ها</a>
-            <a href="#">برنامه‌نویسی</a>
-            <a href="#">هوش مصنوعی</a>
-            <a href="#">طراحی وب</a>
-        </div>
+<div class="categories">
+    <h3>دسته‌بندی دوره‌ها</h3>
+
+    <a href="{% url 'home' %}">
+        همه دوره‌ها
+    </a>
+
+    {% for category in categories %}
+        <a href="{% url 'home' %}?category={{ category.id }}">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+</div>
+
 {% for course in courses %}
         <div class="course">
               <img src="{{ course.image.url }}" alt="{{ course.title }}">
             <h2>{{ course.title }}</h2>
-            <p>آموزش برنامه‌نویسی پایتون از مقدماتی تا پیشرفته</p>
+            
             <a href="{% url 'details' course.pk %}">مشاهده جزئیات</a>
 
         </div>
