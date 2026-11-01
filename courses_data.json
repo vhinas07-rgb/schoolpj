@@ -1,0 +1,71 @@
+[
+{
+  "model": "courses.category",
+  "pk": 1,
+  "fields": {
+    "name": "MachineLearning"
+  }
+},
+{
+  "model": "courses.category",
+  "pk": 2,
+  "fields": {
+    "name": "Programming"
+  }
+},
+{
+  "model": "courses.category",
+  "pk": 3,
+  "fields": {
+    "name": "Framework"
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 1,
+  "fields": {
+    "teacher": 1,
+    "title": "آموزش ML",
+    "status": true,
+    "image": "Machine_Learning_Neon_Workspace.png",
+    "created_at": "2026-10-18T12:15:48.065Z",
+    "price": 20000000,
+    "duration": "16h",
+    "category": [
+      1
+    ]
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 2,
+  "fields": {
+    "teacher": 3,
+    "title": "آموزش زبان پایتون",
+    "status": true,
+    "image": "Python_Learning_Desk_Banner.png",
+    "created_at": "2026-10-19T08:18:36.556Z",
+    "price": 1000000,
+    "duration": "5h",
+    "category": [
+      2
+    ]
+  }
+},
+{
+  "model": "courses.course",
+  "pk": 3,
+  "fields": {
+    "teacher": 2,
+    "title": "آموزش فریم ورک جنگو",
+    "status": true,
+    "image": "Django_Web_Development_Workspace.png",
+    "created_at": "2026-10-19T08:21:57.413Z",
+    "price": 3000000,
+    "duration": "8h",
+    "category": [
+      3
+    ]
+  }
+}
+]
