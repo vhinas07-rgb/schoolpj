@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حذف دوره</title>
+</head>
+<body>
+
+    <h2>حذف دوره</h2>
+
+    <p>
+        آیا مطمئن هستید که می‌خواهید دوره
+        «{{ course.title }}» را حذف کنید؟
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <button type="submit">بله، حذف شود</button>
+
+        <a href="{% url 'courses:home' %}">
+            خیر، انصراف
+        </a>
+
+    </form>
+
+</body>
+</html>

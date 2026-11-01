@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>فرم دوره</title>
+</head>
+<body>
+
+    {% if course %}
+        <h1>ویرایش دوره</h1>
+    {% else %}
+        <h1>ثبت دوره جدید</h1>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                <label>
+                    {{ field.label }}
+                </label>
+
+                {{ field }}
+
+                {% for error in field.errors %}
+                    <p style="color: red;">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+            <br>
+        {% endfor %}
+
+        <button type="submit">ذخیره</button>
+    </form>
+
+</body>
+</html>

@@ -4,6 +4,9 @@
   دوره‌های آموزشی
 {% endblock %}
 {% block content %}
+  {% if user.is_staff %}
+    <a href="{% url 'courses:create' %}">+ ثبت دوره جدید</a>
+  {% endif %}
   <div class="categories">
     <h3>دسته‌بندی دوره‌ها</h3>
 

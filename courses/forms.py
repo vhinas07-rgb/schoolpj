@@ -3,6 +3,9 @@ from courses.models import Course
 
 
 class CourseForm(forms.ModelForm):
+    title = forms.CharField(required=True, max_length=255, label='عنوان')
+    price = forms.IntegerField(required=True, label='هزینه')
+
     class Meta:
         model = Course
         fields = ['title', 'teacher', 'duration', 'price', 'status', 'category']
@@ -11,7 +14,7 @@ class CourseForm(forms.ModelForm):
         title = self.cleaned_data['title']
         if not title.strip():
             raise forms.ValidationError("عنوان نمی‌تواند خالی باشد.")
-        return title
+        return title.strip()
 
     def clean_price(self):
         price = self.cleaned_data['price']
