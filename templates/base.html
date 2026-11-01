@@ -83,11 +83,25 @@
 
     <div class="container">
       {% block content %}
+
       {% endblock %}
     </div>
 
     <footer>
-      <p>سامانه معرفی دوره‌های آموزشی</p>
+      <h3>تماس با ما</h3>
+      <form method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+
+        <input type="text" name="name" placeholder="نام شما" required />
+
+        <input type="email" name="email" placeholder="ایمیل شما" required />
+
+        <input type="text" name="subject" placeholder="موضوع پیام" required />
+
+        <textarea name="message" placeholder="پیام شما" required></textarea>
+
+        <button type="submit">ارسال پیام</button>
+      </form>
     </footer>
   </body>
 </html>

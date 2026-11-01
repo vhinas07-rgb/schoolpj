@@ -21,3 +21,10 @@ class CourseForm(forms.ModelForm):
         if price < 0:
             raise forms.ValidationError("هزینه نمی‌تواند منفی باشد.")
         return price
+    
+    
+    
+class ContactForm(forms.MdelForm): 
+    class Meta:
+        model = Course
+        fields = ['name', 'email', 'subject', 'message']
