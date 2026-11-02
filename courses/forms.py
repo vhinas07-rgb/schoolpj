@@ -10,11 +10,15 @@ class CourseForm(forms.ModelForm):
         model = Course
         fields = ['title', 'teacher', 'duration', 'price', 'status', 'category']
 
+
+
     def clean_title(self):
-        title = self.cleaned_data['title']
-        if not title.strip():
+        title = self.cleaned_data['title'].strip()
+        if not title:
             raise forms.ValidationError("عنوان نمی‌تواند خالی باشد.")
-        return title.strip()
+        return title
+
+
 
     def clean_price(self):
         price = self.cleaned_data['price']
