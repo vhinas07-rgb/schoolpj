@@ -23,6 +23,8 @@ class CourseForm(forms.ModelForm):
         if price < 0:
             return price
         
+        
+        
     def clean(self):
         return self.cleaned_data
     
