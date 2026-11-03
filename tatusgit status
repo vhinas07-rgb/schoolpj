@@ -1,0 +1,137 @@
+[1mdiff --git a/courses/forms.py b/courses/forms.py[m
+[1mindex 37ad567..93df038 100644[m
+[1m--- a/courses/forms.py[m
+[1m+++ b/courses/forms.py[m
+[36m@@ -15,16 +15,11 @@[m [mclass CourseForm(forms.ModelForm):[m
+         title = self.cleaned_data['title'][m
+         return title[m
+ [m
+[31m-[m
+[31m-[m
+[31m-[m
+     def clean_price(self):[m
+         price = self.cleaned_data['price'][m
+         if price < 0:[m
+             return price[m
+         [m
+[31m-        [m
+[31m-        [m
+     def clean(self):[m
+         return self.cleaned_data[m
+     [m
+[1mdiff --git a/courses/views.py b/courses/views.py[m
+[1mindex a9418b6..568654c 100644[m
+[1m--- a/courses/views.py[m
+[1m+++ b/courses/views.py[m
+[36m@@ -1,6 +1,7 @@[m
+[31m-from django.shortcuts import render, get_object_or_404[m
+[31m-from courses.models import Course, Category[m
+[32m+[m[32mfrom django.shortcuts import render, get_object_or_404, redirect[m
+ [m
+[32m+[m[32mfrom .models import Course, Category[m
+[32m+[m[32mfrom .forms import CourseForm[m
+ [m
+ def home_view(request):[m
+     category_id = request.GET.get('category')[m
+[36m@@ -20,3 +21,23 @@[m [mdef detail_view(request,pid):[m
+     course = get_object_or_404(Course ,pk=pid ,status=True)[m
+     context = {'course':course}[m
+     return render(request, 'detail.html',context)[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef course_form_view(request, pid=None):[m
+[32m+[m
+[32m+[m[32m    if pid:[m
+[32m+[m[32m        course = get_object_or_404(Course, pk=pid)[m
+[32m+[m[32m    else:[m
+[32m+[m[32m        course = None[m
+[32m+[m
+[32m+[m[32m    if request.method == 'POST':[m
+[32m+[m[32m        form = CourseForm(request.POST, instance=course)[m
+[32m+[m
+[32m+[m[32m        if form.is_valid():[m
+[32m+[m[32m            form.save()[m
+[32m+[m[32m            return redirect('home')[m
+[32m+[m
+[32m+[m[32m    else:[m
+[32m+[m[32m        form = CourseForm(instance=course)[m
+[32m+[m
+[32m+[m[32m    return render(request, 'course_form.html', {'form': form})[m
+\ No newline at end of file[m
+[1mdiff --git a/courses_data.json b/courses_data.json[m
+[1mdeleted file mode 100644[m
+[1mindex 803455f..0000000[m
+[1m--- a/courses_data.json[m
+[1m+++ /dev/null[m
+[36m@@ -1,71 +0,0 @@[m
+[31m-[[m
+[31m-{[m
+[31m-  "model": "courses.category",[m
+[31m-  "pk": 1,[m
+[31m-  "fields": {[m
+[31m-    "name": "MachineLearning"[m
+[31m-  }[m
+[31m-},[m
+[31m-{[m
+[31m-  "model": "courses.category",[m
+[31m-  "pk": 2,[m
+[31m-  "fields": {[m
+[31m-    "name": "Programming"[m
+[31m-  }[m
+[31m-},[m
+[31m-{[m
+[31m-  "model": "courses.category",[m
+[31m-  "pk": 3,[m
+[31m-  "fields": {[m
+[31m-    "name": "Framework"[m
+[31m-  }[m
+[31m-},[m
+[31m-{[m
+[31m-  "model": "courses.course",[m
+[31m-  "pk": 1,[m
+[31m-  "fields": {[m
+[31m-    "teacher": 1,[m
+[31m-    "title": "آموزش ML",[m
+[31m-    "status": true,[m
+[31m-    "image": "Machine_Learning_Neon_Workspace.png",[m
+[31m-    "created_at": "2026-10-18T12:15:48.065Z",[m
+[31m-    "price": 20000000,[m
+[31m-    "duration": "16h",[m
+[31m-    "category": [[m
+[31m-      1[m
+[31m-    ][m
+[31m-  }[m
+[31m-},[m
+[31m-{[m
+[31m-  "model": "courses.course",[m
+[31m-  "pk": 2,[m
+[31m-  "fields": {[m
+[31m-    "teacher": 3,[m
+[31m-    "title": "آموزش زبان پایتون",[m
+[31m-    "status": true,[m
+[31m-    "image": "Python_Learning_Desk_Banner.png",[m
+[31m-    "created_at": "2026-10-19T08:18:36.556Z",[m
+[31m-    "price": 1000000,[m
+[31m-    "duration": "5h",[m
+[31m-    "category": [[m
+[31m-      2[m
+[31m-    ][m
+[31m-  }[m
+[31m-},[m
+[31m-{[m
+[31m-  "model": "courses.course",[m
+[31m-  "pk": 3,[m
+[31m-  "fields": {[m
+[31m-    "teacher": 2,[m
+[31m-    "title": "آموزش فریم ورک جنگو",[m
+[31m-    "status": true,[m
+[31m-    "image": "Django_Web_Development_Workspace.png",[m
+[31m-    "created_at": "2026-10-19T08:21:57.413Z",[m
+[31m-    "price": 3000000,[m
+[31m-    "duration": "8h",[m
+[31m-    "category": [[m
+[31m-      3[m
+[31m-    ][m
+[31m-  }[m
+[31m-}[m
+[31m-][m

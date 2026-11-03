@@ -1,10 +1,10 @@
 from django import forms
-from courses.models import Course
+from courses.models import Course,Contact
 
 
 class CourseForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=255, label='عنوان')
-    price = forms.IntegerField(required=True, label='هزینه')
+    price = forms.IntegerField(required=True,  min_value=0, label='هزینه')
     class Meta:
         model = Course
         fields = ['title', 'teacher', 'duration', 'price', 'status', 'category']
@@ -26,7 +26,7 @@ class CourseForm(forms.ModelForm):
         return self.cleaned_data
     
     
-class ContactForm(forms.MdelForm): 
+class ContactForm(forms.ModelForm): 
     class Meta:
-        model = Course
+        model = Contact
         fields = ['name', 'email', 'subject', 'message']
