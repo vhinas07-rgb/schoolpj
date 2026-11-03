@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from courses.models import Course, Category
+from django.shortcuts import render, get_object_or_404, redirect
 
+from .models import Course, Category
+from .forms import CourseForm
 
 def home_view(request):
     category_id = request.GET.get('category')
@@ -20,3 +21,23 @@ def detail_view(request,pid):
     course = get_object_or_404(Course ,pk=pid ,status=True)
     context = {'course':course}
     return render(request, 'detail.html',context)
+
+
+def course_form_view(request, pid=None):
+
+    if pid:
+        course = get_object_or_404(Course, pk=pid)
+    else:
+        course = None
+
+    if request.method == 'POST':
+        form = CourseForm(request.POST, instance=course)
+
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    else:
+        form = CourseForm(instance=course)
+
+    return render(request, 'course_form.html', {'form': form})
