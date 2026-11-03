@@ -15,9 +15,6 @@ class CourseForm(forms.ModelForm):
         title = self.cleaned_data['title']
         return title
 
-
-
-
     def clean_price(self):
         price = self.cleaned_data['price']
         if price < 0:
