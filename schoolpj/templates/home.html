@@ -19,7 +19,13 @@
 
   {% for course in courses %}
   <div class="course">
+<<<<<<< HEAD:schoolpj/templates/home.html
     <img src="{{ course.image.url }}" alt="{{ course.title }}" />
+=======
+    {% if course.image %}
+    <img src="{{ course.image.url }}" alt="{{ course.title }}">
+{% endif %}
+>>>>>>> baa5f19 (Add course create, update, delete and form validation,edit form and view):templates/home.html
     <h2>{{ course.title }}</h2>
 
     <a href="{% url 'details' course.pk %}">مشاهده جزئیات</a>

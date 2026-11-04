@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+<<<<<<< HEAD
 from .models import Course, Category
 from .forms import CourseForm,ContactForm
+=======
+from .forms import CourseForm, ContactForm
+from .models import Course, Category
+>>>>>>> baa5f19 (Add course create, update, delete and form validation,edit form and view)
 
 
 def home_view(request):
@@ -31,6 +36,7 @@ def course_form_view(request, pid=None):
         course = None
 
     if request.method == 'POST':
+<<<<<<< HEAD
 
         form = CourseForm(request.POST, request.FILES, instance=course)
 
@@ -59,6 +65,39 @@ def delete_view(request, pid):
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
+=======
+        form = CourseForm(request.POST,request.FILES, instance=course)
+>>>>>>> baa5f19 (Add course create, update, delete and form validation,edit form and view)
+
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+<<<<<<< HEAD
+    return redirect('home')
+   
+=======
+    else:
+        form = CourseForm(instance=course)
+
+    return render(
+        request,
+        'form.html',{'form': form, 'course': course})
+
+def delete_view(request, pid):
+    course = get_object_or_404(Course, pk=pid)
+
+    if request.method == 'POST':
+        course.delete()
+        return redirect('home')
+
+    return render(request, 'course_confirm_delete.html', {
+        'course': course
+    })
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -66,3 +105,4 @@ def contact_view(request):
 
     return redirect('home')
    
+>>>>>>> baa5f19 (Add course create, update, delete and form validation,edit form and view)

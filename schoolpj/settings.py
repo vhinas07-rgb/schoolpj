@@ -116,8 +116,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
+<<<<<<< HEAD
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'schoolpj' / 'static']
+=======
+STATIC_URL = 'static/logo/'
+STATICFILES_DIRS = [BASE_DIR  / 'static']
+>>>>>>> baa5f19 (Add course create, update, delete and form validation,edit form and view)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
