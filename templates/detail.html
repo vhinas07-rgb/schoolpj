@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
   <head>
@@ -95,9 +96,8 @@
         در این دور با موضوع درس و اصول برنامه نویسی آشنا می‌شوید.
       </p>
       {% if user.is_staff %}
-        <a href="{% url 'courses:update' course.pk %}">ویرایش دوره</a>
-
-        <a href="{% url 'courses:delete' course.pk %}">حذف دوره</a>
+        <a href="{% url 'course_edit' course.pk %}">ویرایش دوره</a>
+        <a href="{% url 'delete' course.pk %}">حذف دوره</a>
       {% endif %}
       <a href="{% url 'home' %}">بازگشت به دوره‌ها</a>
     </div>

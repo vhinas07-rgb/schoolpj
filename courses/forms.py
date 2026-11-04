@@ -9,22 +9,9 @@ class CourseForm(forms.ModelForm):
         model = Course
         fields = ['title', 'teacher', 'duration', 'price', 'status', 'category']
 
-
-
     def clean_title(self):
         title = self.cleaned_data['title']
         return title
-
-    def clean_price(self):
-        price = self.cleaned_data['price']
-        if price < 0:
-            return price
-        
-        
-        
-    def clean(self):
-        return self.cleaned_data
-    
     
 class ContactForm(forms.ModelForm): 
     class Meta:

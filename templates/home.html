@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
   {% if user.is_staff %}
-    <a href="{% url 'courses:create' %}">+ ثبت دوره جدید</a>
+    <a href="{% url 'course_form' %}">+ ثبت دوره جدید</a>
   {% endif %}
   <div class="categories">
     <h3>دسته‌بندی دوره‌ها</h3>
@@ -18,11 +18,16 @@
   </div>
 
   {% for course in courses %}
-    <div class="course">
-      <img src="{{ course.image.url }}" alt="{{ course.title }}" />
-      <h2>{{ course.title }}</h2>
+  <div class="course">
+    <img src="{{ course.image.url }}" alt="{{ course.title }}" />
+    <h2>{{ course.title }}</h2>
 
-      <a href="{% url 'details' course.pk %}">مشاهده جزئیات</a>
-    </div>
-  {% endfor %}
+    <a href="{% url 'details' course.pk %}">مشاهده جزئیات</a>
+
+    {% if user.is_staff %}
+      <a href="{% url 'course_edit' course.pk %}">ویرایش</a>
+      <a href="{% url 'delete' course.pk %}">حذف</a>
+    {% endif %}
+  </div>
+{% endfor %}
 {% endblock %}
