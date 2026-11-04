@@ -10,16 +10,13 @@ class CourseForm(forms.ModelForm):
         fields = ['title', 'teacher', 'duration', 'price', 'status', 'category']
 
     def clean_title(self):
-        title = self.cleaned_data['title']
+        title = self.cleaned_data['title'].strip()
         return title
 
-    def clean_price(self):
-        price = self.cleaned_data['price']
-        if price < 0:
-            return price
-        
     def clean(self):
-        return self.cleaned_data
+        cleaned_data = super().clean()
+        return cleaned_data
+
 
 class ContactForm(forms.ModelForm): 
     class Meta:
