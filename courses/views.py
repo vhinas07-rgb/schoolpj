@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
 from .models import Course, Category
 from .forms import CourseForm,ContactForm
+
 
 def home_view(request):
     category_id = request.GET.get('category')
@@ -31,12 +31,14 @@ def course_form_view(request, pid=None):
         course = None
 
     if request.method == 'POST':
+
         form = CourseForm(request.POST, request.FILES, instance=course)
+
+        
 
         if form.is_valid():
             form.save()
             return redirect('home')
-
     else:
         form = CourseForm(instance=course)
 
@@ -63,3 +65,4 @@ def contact_view(request):
             return redirect('home')
 
     return redirect('home')
+   
