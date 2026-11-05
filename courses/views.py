@@ -23,7 +23,7 @@ def detail_view(request,pid):
     return render(request, 'detail.html',context)
 
 
-def course_form_view(request, pid=None):
+def form_view(request, pid=None):
 
     if pid:
         course = get_object_or_404(Course, pk=pid)
