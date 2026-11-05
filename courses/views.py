@@ -21,9 +21,9 @@ def detail_view(request,pid):
     course = get_object_or_404(Course ,pk=pid ,status=True)
     context = {'course':course}
     return render(request, 'detail.html',context)
+#مدل course
 
-
-def course_form_view(request, pid=None):
+def form_view(request, pid=None):
 
     if pid:
         course = get_object_or_404(Course, pk=pid)
@@ -31,8 +31,8 @@ def course_form_view(request, pid=None):
         course = None
 
     if request.method == 'POST':
-        form = CourseForm(request.POST,request.FILES, instance=course)
-
+        form = CourseForm(request.POST, request.FILES, instance=course)
+        
         if form.is_valid():
             form.save()
             return redirect('home')

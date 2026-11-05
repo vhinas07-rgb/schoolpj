@@ -13,8 +13,6 @@ class CourseForm(forms.ModelForm):
     def clean_title(self):
         title = self.cleaned_data['title'].strip()
         return title
-
-  
 class ContactForm(forms.ModelForm): 
     class Meta:
         model = Contact
