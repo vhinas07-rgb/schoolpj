@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
 from .forms import CourseForm, ContactForm
 from .models import Course, Category
 
@@ -8,6 +9,10 @@ def home_view(request):
 
     if category_id:
         courses = Course.objects.filter(category__id=category_id)
+        
+        if not courses:
+            return HttpResponse('این دسته‌بندی وجود ندارد.')
+        
     else:
         courses = Course.objects.all()
 
